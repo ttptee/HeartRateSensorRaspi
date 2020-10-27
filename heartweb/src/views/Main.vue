@@ -15,6 +15,7 @@
     <button class="StartBtn" v-on:click="click122()">
         Start
     </button>
+     <router-view/>
 </div>
 
 </template>
