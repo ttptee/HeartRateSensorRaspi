@@ -2,12 +2,12 @@
 <div>    
     <div class="Header">
         <!-- Heart Rate Result -->
-        {{Hr}}
+        <!-- {{Hr}} -->
         <div>
             AVG : {{AVG}}
         </div>
         <div>
-          <LineChart :chartData="datacollection" :options="chartOptions"></LineChart>
+          <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
         </div>
         <!-- <HrRateLine/> -->
     </div>
@@ -21,25 +21,41 @@
 </template>
 
 <script>
+
 import Vue from 'vue'
 import firebase from 'firebase'
 import { firestorePlugin } from 'vuefire'
 // import HrRateLine from '../components/lineHr.vue'
-import LineChart from '../components/lineHr.vue'
+// import LineChart from '../components/lineHr.vue'
+import VueApexCharts from 'vue-apexcharts'
+Vue.component('apexchart', VueApexCharts)
 
   export default {
       components:{
           // HrRateLine,
-          LineChart,
+          // LineChart,
       },
       name: 'App',
       data () {
       return {
+         chartOptions: {
+          chart: {
+            id: 'vuechart-example',
+          },
+          xaxis: {
+            
+          },
+        },
+        series: [{
+          name: 'series-1',
+          data: [0],
+        }],
+      
         messagesRef:'',
         DataHr:[],
         DataAvg:[],
-        datacollection: null,
-        chartOptions: null,
+        
+        
         
       }
     },
@@ -98,7 +114,14 @@ that.DataHr.push(Hr);
 that.DataAvg.push(avg/i)
 console.log("--data2--")
 console.log(that.DataAvg)
+that.series.data=that.DataHr
+console.log("series")
+console.log(that.series.data)
+that.updateChart(that.series.data)
+
 });
+
+
 
 // -----------------------------------------------
 
@@ -147,77 +170,7 @@ console.log(that.DataAvg)
     },
    async mounted () {
      
-      this.datacollection = {
-        //   labels: ['08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00'],
-          datasets: [
-
-            {
-              label: 'Plan',
-              backgroundColor: 'rgba(255, 122, 122, 1)',
-              fill:false,
-              data: await this.DataHr,
-              datalabels: {
-              display:false,                
-            },
-            }, 
-          ],      
-        },
-        this.chartOptions ={
-          plugins: {
-          datalabels: {
-            color: "black",
-            textAlign: "center",
-            font: {
-              weight: "bold",
-              size: 12,
-            },
-          }
-        },
-            responsive: true,
-          legend: {
-            position: "top"
-          },
-          hover: {
-            mode: "label"
-          },
-          scales: {
-            xAxes: [
-              {
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: "Time"
-                },
-                gridLines: {
-                            drawOnChartArea: false, // only want the grid lines for one axis to show up
-                        },
-              }
-            ],
-                yAxes: [{
-                        
-                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
-                        display: true,
-                        position: "left",
-                        id: "y-axis-1",
-                        scaleLabel:{
-                          display:true,
-                          labelString: "Production (unit)"
-                        },
-                         gridLines: {
-                            drawOnChartArea: false, // only want the grid lines for one axis to show up
-                        },
-                        ticks: {
-                  
-                  stepSize: 10,
-                  min:40,
-                  max: 200,
-                                  
-                }
-                    },],
-          }
-    }
-    this.loadcheck=true
-    
+     
 
 
         
@@ -243,7 +196,7 @@ console.log(that.DataAvg)
       
 //   });
 // });
-        setTimeout(this.AvgHr, 10000)
+        setTimeout(this.AvgHr, 30000)
         },
         
         AvgHr(){
@@ -284,6 +237,20 @@ console.log(that.DataAvg)
         
         
       },
+      updateChart(data) {
+        console.log("Update data : ")
+        console.log(data)
+        const colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0']
+
+        // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
+        this.chartOptions = {
+          colors: [colors[Math.floor(Math.random()*colors.length)]]
+        };
+        // In the same way, update the series option
+        this.series = [{
+          data: data
+        }]
+      }
         
     }
     
