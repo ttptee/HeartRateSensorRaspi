@@ -39,6 +39,11 @@ export default new Router({
             name:"Chawprapa",
             component: ()=> import("@/views/Chawprapa"),
         },
+        {
+            path:"/Group",
+            name:"Group",
+            component: ()=> import("@/views/Group"),
+        },
         
     ]
 })

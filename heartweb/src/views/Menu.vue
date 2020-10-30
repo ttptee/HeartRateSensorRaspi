@@ -34,13 +34,13 @@
       </router-link>
         
         
-   
+    <router-link to="/Group">
         <div class="menu_card_assetcontrol"><!--div for card menu assetcontrol-->
             <img class="card_assetcontrol" alt="balloons" src="../assets/balloons.svg">
             <div class="font_card_assetcontrol">Group Heart Rate</div>
             <div class="font_detail_l ">60010150 / 60010265 / 60010248</div>
         </div>  <!--div for card menu manpower--> 
-        
+    </router-link>  
         
         <router-view/>
 </div>
