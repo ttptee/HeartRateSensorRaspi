@@ -1,20 +1,27 @@
 <template>
 <!-- in raspi use ttyUSB1 -->
 <div>    
-    <div class="Header1">
+   <div v-on:click="changepage()">   
+  <img class="home_icon_pu" alt="home_pu" src="../assets/logo1.svg">
+        <div class="home_font_pu">Microelectrics and Info Healthcare </div>
+  </div>  
+    <div class="Header2">
         <!-- Heart Rate Result -->
         <!-- {{Hr}} -->
         <div>
             AVG : {{AVG}}
         </div>
-        <div>
-          <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+    </div>
+        <div class="div_graph_pu">
+          <apexchart class="graph_pu" type="line" height="250" ref="chart" :options="chartOptions" :series="series"></apexchart>
         </div>
         <!-- <HrRateLine/> -->
-    </div>
+    
    
-    <button class="StartBtn1" v-on:click="click122()">
-        Start
+    <button class="StartBtn2" v-on:click="click122()">
+      <img class="logo-start_pu" alt="start_pu" src="../assets/start.svg">
+      <div class="text_start_pu">Start</div>
+      <div class="text_heartrate_pu">Start to Measure Heartrate</div>
     </button>
      <router-view/>
 </div>
@@ -132,6 +139,9 @@ that.updateChart(that.series.data)
         
     },
     methods:{
+      changepage(){
+        this.$router.push("/")
+      },
         click122:function(){
             this.DataHr=[]
         console.log('click')
@@ -201,20 +211,68 @@ console.log(that.DataAvg)
 body{
     background-color: #ECB36C;
 }
-.Header1{
-    text-align: center;
-    font-size: 50px;
-    color: aliceblue;
+.home_icon_pu{
+  width:3.2%;
+  margin-top:-120px;
+  margin-left:8%;
+  font-weight:200;
+  position: absolute;
+   } 
+.home_font_pu{
+  font-size:1.3em;
+  margin-left:13%;
+  margin-top:-105px;
+  font-weight:700;
+  position: absolute;
+  color:#ffffff;
+   }
+.div_graph_pu{
+  background: #f7f7f7;
+  margin-top:-35px;
+  border-radius: 10px;
+  width:90%;
+  margin-left:5%;
+  height: 350px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
-.StartBtn1{
-    position: absolute;
-    width: 30%;
-    bottom: 10%;
-    height: 150px;
-    font-size: 30px;
-    left: 35%;
-
+.text_start_pu{
+  color:#fff;
+  font-size: 1.5em;
+  text-align: center;
 }
-
+.graph_pu{
+  width:90%;
+  margin-left:5%;
+  padding-top:50px;
+  color:#fff;
+  margin-top:5%;
+}
+.Header2{
+  margin-top:170px;
+  text-align: center;
+  font-size: 50px;
+  color: aliceblue;
+}
+.StartBtn2{
+  position: absolute;
+  top:670px;
+  width:25%;
+  bottom:10%;
+  height:150px;
+  left:40%;
+  background: #445D68;
+  border-radius: 10px;
+  border:none;
+}
+.text_heartrate_pu{
+  margin-top:10px;
+  font-size:1em;
+  color:#fff;
+  text-align: center;
+}
+.logo-start_pu{
+  padding-top:10px;
+  width:10%;
+}
 
 </style>
