@@ -9,7 +9,7 @@
         <img class="home_icon" alt="home" src="../assets/logo.svg">
         <div class="home_font">Microelectrics and Info Healthcare </div>
    <!--div for homeicon-->
-      <router-link to="/Thitipat">
+      <router-link to="/Thitipat2">
         <div class="menu_card_production"><!--div for card menu production-->
             <img class="card_production" alt="heart" src="../assets/heart-rate.svg">
             <div class="font_card_production">60010150</div>

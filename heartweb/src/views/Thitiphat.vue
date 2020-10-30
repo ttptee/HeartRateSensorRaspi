@@ -1,5 +1,7 @@
 <template>
-<div>    
+
+<div> 
+  <!-- in raspi use ttyUSB0 -->   
     <div class="Header">
         <!-- Heart Rate Result -->
         <!-- {{Hr}} -->
