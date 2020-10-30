@@ -192,13 +192,15 @@ that.updateChart(that.series.data,that.series.data1)
     methods:{
         click122:function(){
             this.DataHr=[]
+            this.DataHr1=[]
         console.log('click')
-        firebase.database().ref('/status1').set(1);
+        firebase.database().ref('/status').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         
         AvgHr(){
             this.DataAvg=[]
+            this.DataAvg1=[]
 var that = this
 var i = 0
 var avg =0
@@ -222,7 +224,7 @@ query.once("value")
      
   });
   console.log(avg/i)
-  firebase.database().ref('/status1').set(2);
+  firebase.database().ref('/status').set(2);
 that.DataAvg.push(avg/i)
 console.log("data--")
 console.log(that.DataAvg)
