@@ -9,7 +9,7 @@
         <img class="home_icon" alt="home" src="../assets/logo.svg">
         <div class="home_font">Microelectrics and Info Healthcare </div>
    <!--div for homeicon-->
-      <router-link to="/Thitipat2">
+      <router-link to="/Jiraporn">
         <div class="menu_card_production"><!--div for card menu production-->
             <img class="card_production" alt="heart" src="../assets/heart-rate.svg">
             <div class="font_card_production">60010150</div>
@@ -25,7 +25,7 @@
         </div>  <!--div for card menu abnormal--> 
        </router-link>
 
-      <router-link to="/Thitipat">
+      <router-link to="/Chawprapa">
         <div class="menu_card_manpower"><!--div for card menu manpower-->
             <img class="card_manpower" alt="heart2" src="../assets/heart-rate2.svg">
             <div class="font_card_manpower">60010248</div>

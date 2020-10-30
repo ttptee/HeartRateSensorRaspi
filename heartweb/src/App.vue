@@ -7,10 +7,15 @@
 <script>
 
 export default {
+  
   name: 'App',
   components: {
    
-  }
+  },
+  created(){
+    
+  },
+  
 }
 </script>
 

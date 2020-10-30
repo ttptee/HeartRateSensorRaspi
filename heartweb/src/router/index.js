@@ -24,17 +24,21 @@ export default new Router({
         //     component: ()=> import("@/views/Change_Password"),
         // },
         {
-            path:"/Thitipat2",
-            name:"Jiraporn",
-            conponent: ()=> import("@/views/Thitiphat"),
-        },
-        {
             path:"/Thitipat",
             name:"Thitipat",
             component: ()=> import("@/views/Thitiphat"),
            
         },
-       
+        {
+            path:"/Jiraporn",
+            name:"Jiraporn",
+            component: ()=> import("@/views/Jiraporn"),
+        },
+        {
+            path:"/Chawprapa",
+            name:"Chawprapa",
+            component: ()=> import("@/views/Chawprapa"),
+        },
         
     ]
 })

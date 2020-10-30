@@ -1,7 +1,7 @@
 <template>
-<!-- in raspi use ttyUSB0 -->
+<!-- in raspi use ttyUSB1 -->
 <div>    
-    <div class="Header">
+    <div class="Header1">
         <!-- Heart Rate Result -->
         <!-- {{Hr}} -->
         <div>
@@ -13,7 +13,7 @@
         <!-- <HrRateLine/> -->
     </div>
    
-    <button class="StartBtn" v-on:click="click122()">
+    <button class="StartBtn1" v-on:click="click122()">
         Start
     </button>
      <router-view/>
@@ -72,7 +72,8 @@ var firebaseConfig = {
     appId: "1:496826199527:web:6849e4b5dddde3ff9fe142",
     measurementId: "G-PNXTZDDN1S"
   };
-   if (!firebase.apps.length) {
+   
+if (!firebase.apps.length) {
    firebase.initializeApp(firebaseConfig) 
 }
 this.dataHr=[0]
@@ -81,7 +82,7 @@ var that = this
 var i = 0
 var avg =0
 var Hr=0
-var query = firebase.database().ref("hearthrate").orderByKey();
+var query = firebase.database().ref("hearthrate2").orderByKey();
 query.on("value",snapshot=>{
   snapshot.forEach(function(childSnapshot) {
       // key will be "ada" the first time and "alan" the second time
@@ -113,6 +114,7 @@ that.updateChart(that.series.data)
 });
 
 
+
     },
     computed:{
         AVG: function(){
@@ -133,7 +135,7 @@ that.updateChart(that.series.data)
         click122:function(){
             this.DataHr=[]
         console.log('click')
-        firebase.database().ref('/status').set(1);
+        firebase.database().ref('/status2').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         
@@ -142,7 +144,7 @@ that.updateChart(that.series.data)
 var that = this
 var i = 0
 var avg =0
-var query = firebase.database().ref("hearthrate").orderByKey();
+var query = firebase.database().ref("hearthrate2").orderByKey();
 query.once("value")
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -162,7 +164,7 @@ query.once("value")
      
   });
   console.log(avg/i)
-  firebase.database().ref('/status').set(2);
+  firebase.database().ref('/status2').set(2);
 that.DataAvg.push(avg/i)
 console.log("data--")
 console.log(that.DataAvg)
@@ -197,14 +199,14 @@ console.log(that.DataAvg)
 
 <style>
 body{
-    background-color: cadetblue;
+    background-color: #ECB36C;
 }
-.Header{
+.Header1{
     text-align: center;
     font-size: 50px;
     color: aliceblue;
 }
-.StartBtn{
+.StartBtn1{
     position: absolute;
     width: 30%;
     bottom: 10%;

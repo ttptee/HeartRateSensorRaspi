@@ -1,8 +1,21 @@
 <template>
-
+<!-- in raspi use ttyUSB1 -->
 <div>    
-    <!-- in raspi use ttyUSB1 -->
-  test
+    <div class="Header1">
+        <!-- Heart Rate Result -->
+        <!-- {{Hr}} -->
+        <div>
+            AVG : {{AVG}}
+        </div>
+        <div>
+          <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+        </div>
+        <!-- <HrRateLine/> -->
+    </div>
+   
+    <button class="StartBtn1" v-on:click="click122()">
+        Start
+    </button>
      <router-view/>
 </div>
 
@@ -59,19 +72,10 @@ var firebaseConfig = {
     appId: "1:496826199527:web:6849e4b5dddde3ff9fe142",
     measurementId: "G-PNXTZDDN1S"
   };
-   
- let app = firebase.initializeApp(firebaseConfig) 
-  let db = app.database()
-  this.messagesRef = db.ref('/status1') //นำค่าของ messages ใส่เก็บไว้ในตัวแปร messagesRef  
-  console.log(this.messagesRef)   
-// var ref = firebase.database().ref("hearthrate").orderByKey();
+if (!firebase.apps.length) {
+   firebase.initializeApp(firebaseConfig) 
+}
 
-// ref.on('value', snapshot=> {
-  
-//   this.DataHr=[]
-//    this.DataHr.push(snapshot.val());
-//    console.log(this.DataHr)
-// });
 this.dataHr=[0]
  this.DataAvg=[]
 var that = this
@@ -109,44 +113,6 @@ that.updateChart(that.series.data)
 
 });
 
-
-
-// -----------------------------------------------
-
-
-  
-  
-
-
-// -----------------------------------------
-// var i = 0
-// var avg =0
-// var query = firebase.database().ref("hearthrate").orderByKey();
-// var that = this
-// query.on("value")
-//   .then(function(snapshot) {
-//     snapshot.forEach(function(childSnapshot) {
-//       // key will be "ada" the first time and "alan" the second time
-//     //   var key = childSnapshot.key;
-//     //   console.log(key)
-//       // childData will be the actual contents of the child
-//       var childData = childSnapshot.val();
-      
-      
-      
-//       console.log(i)
-      
-//       i++
-//       avg = (avg+parseFloat(childData))
-//       console.log(avg)
-      
-//   });
-  
-//   console.log(avg/i)
-//   that.DataAvg.push(avg/i)
-//   console.log(that.DataAvg)
-// });
-
     },
     computed:{
         AVG: function(){
@@ -168,22 +134,6 @@ that.updateChart(that.series.data)
             this.DataHr=[]
         console.log('click')
         firebase.database().ref('/status1').set(1);
-// var query = firebase.database().ref("hearthrate").orderByKey();
-// var that = this
-// query.once("child_added")
-//   .then(function(snapshot) {
-//     snapshot.forEach(function(childSnapshot) {
-//       // key will be "ada" the first time and "alan" the second time
-//     //   var key = childSnapshot.key;
-//     //   console.log(key)
-//       // childData will be the actual contents of the child
-//     //   var childData = childSnapshot.val();
-      
-//       that.DataHr.push(childSnapshot.val());
-//       console.log(that.DataHr)
-      
-//   });
-// });
         setTimeout(this.AvgHr, 30000)
         },
         
@@ -247,7 +197,7 @@ console.log(that.DataAvg)
 
 <style>
 body{
-    background-color: pink;
+    background-color: #FFA183;
 }
 .Header1{
     text-align: center;
