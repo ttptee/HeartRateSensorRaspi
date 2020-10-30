@@ -1,20 +1,27 @@
 <template>
 <!-- in raspi use ttyUSB0 -->
-<div>    
+<div>
+   <div v-on:click="changepage()">  
+  <img class="home_icon_tee" alt="home_tee" src="../assets/logo1.svg">
+        <div class="home_font_tee">Microelectrics and Info Healthcare </div>
+  </div> 
     <div class="Header">
         <!-- Heart Rate Result -->
         <!-- {{Hr}} -->
         <div>
             AVG : {{AVG}}
         </div>
-        <div>
-          <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
+         </div>
+        <div class="div_graph">
+          <apexchart class="graph_thitipat" type="line" height="250" ref="chart" :options="chartOptions" :series="series"></apexchart>
         </div>
         <!-- <HrRateLine/> -->
-    </div>
+   
    
     <button class="StartBtn" v-on:click="click122()">
-        Start
+       <img class="logo-start" alt="start" src="../assets/start.svg">
+      <div class="text_start">Start</div>
+      <div class="text_heartrate">Start to Measure Heartrate</div>
     </button>
      <router-view/>
 </div>
@@ -130,6 +137,9 @@ that.updateChart(that.series.data)
         
     },
     methods:{
+      changepage(){
+        this.$router.push("/")
+      },
         click122:function(){
             this.DataHr=[]
         console.log('click')
@@ -196,22 +206,71 @@ console.log(that.DataAvg)
 </script>
 
 <style>
+.home_icon_tee{
+  width:3.2%;
+  margin-top:-120px;
+  margin-left:8%;
+  font-weight:200;
+  position: absolute;
+   } 
+.home_font_tee{
+  font-size:1.3em;
+  margin-left:13%;
+  margin-top:-105px;
+  font-weight:700;
+  position: absolute;
+  color:#ffffff;
+   }
+.div_graph{
+  background: #f7f7f7;
+  margin-top:-40px;
+  border-radius: 10px;
+  width:90%;
+  margin-left:5%;
+  height: 350px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.text_start{
+  color:#fff;
+  font-size: 1.5em;
+  text-align: center;
+}
+.graph_thitipat{
+  width:90%;
+  margin-left:5%;
+  padding-top:50px;
+  color:#fff;
+  margin-top:5%;
+}
 body{
-    background-color: cadetblue;
+  background-color: #88AEDA;
 }
 .Header{
-    text-align: center;
-    font-size: 50px;
-    color: aliceblue;
+  margin-top:170px;
+  text-align: center;
+  font-size: 50px;
+  color: aliceblue;
 }
 .StartBtn{
-    position: absolute;
-    width: 30%;
-    bottom: 10%;
-    height: 150px;
-    font-size: 30px;
-    left: 35%;
-
+  position: absolute;
+  top:670px;
+  width:25%;
+  bottom:10%;
+  height:150px;
+  left:40%;
+  background: #445D68;
+  border-radius: 10px;
+  border:none;
+}
+.text_heartrate{
+  margin-top:10px;
+  font-size:1em;
+  color:#fff;
+  text-align: center;
+}
+.logo-start{
+  padding-top:10px;
+  width:10%;
 }
 
 
