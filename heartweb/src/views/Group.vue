@@ -11,7 +11,7 @@
             AVG1 : {{AVG1}}
         </div>
         <div>
-            AVG : {{AVG}}
+            AVG2 : {{AVG2}}
         </div>
         <div>
           <apexchart type="line" height="350" ref="chart" :options="chartOptions" :series="series"></apexchart>
@@ -119,6 +119,7 @@ query.on("value",snapshot=>{
       
      
   });
+  console.log("########################################### AVG ##################################")
   console.log(avg/i)
 that.DataHr.push(Hr); 
 that.DataAvg.push(avg/i)
@@ -127,7 +128,7 @@ console.log(that.DataAvg)
 that.series.data=that.DataHr
 console.log("series")
 console.log(that.series.data)
-
+that.updateChart(that.series.data,that.series.data1,that.series.data2)
 });
 
 // 1--------------------------------------------------------------------------
@@ -155,18 +156,56 @@ query1.on("value",snapshot1=>{
       
      
   });
+   console.log("########################################### AVG1 ##################################")
   console.log(avg1/i1)
 that.DataHr1.push(Hr1); 
 that.DataAvg1.push(avg1/i1)
-console.log("--data2--")
+console.log("--data2//--")
 console.log(that.DataAvg1)
 that.series.data1=that.DataHr1
 console.log("series")
 console.log(that.series.data1)
-that.updateChart(that.series.data,that.series.data1)
+that.updateChart(that.series.data,that.series.data1,that.series.data2)
 
 });
 
+// -----------------------------------------------------------------------
+this.dataHr2=[0]
+this.DataAvg2=[]
+var i2 = 0
+var avg2 =0
+var Hr2=0
+var query2 = firebase.database().ref("hearthrate2").orderByKey();
+query2.on("value",snapshot2=>{
+  snapshot2.forEach(function(childSnapshot2) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData2 = childSnapshot2.val();
+      console.log(childData2)
+      
+      console.log(i2)
+      
+      i2++
+      Hr2 = (parseFloat(childData2))
+      avg2 = (avg+parseFloat(childData2))
+      console.log(avg2)
+      
+     
+  });
+   console.log("########################################### AVG2 ##################################")
+  console.log(avg2/i2)
+that.DataHr2.push(Hr2); 
+that.DataAvg2.push(avg2/i2)
+console.log("--data2##--")
+console.log(that.DataAvg2)
+that.series.data2=that.DataHr2
+console.log("series")
+console.log(that.series.data2)
+that.updateChart(that.series.data,that.series.data1,that.series.data2)
+
+});
     },
     computed:{
         AVG: function(){
@@ -180,6 +219,12 @@ that.updateChart(that.series.data,that.series.data1)
         },
         Hr1: function(){
             return this.DataHr1
+        },
+        AVG2: function(){
+            return this.DataAvg2[0]
+        },
+        Hr2: function(){
+            return this.DataHr2
         }
     },
    async mounted () {
@@ -193,17 +238,25 @@ that.updateChart(that.series.data,that.series.data1)
         click122:function(){
             this.DataHr=[]
             this.DataHr1=[]
+            this.DataHr2=[]
         console.log('click')
         firebase.database().ref('/status').set(1);
+        firebase.database().ref('/status1').set(1);
+        firebase.database().ref('/status2').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         
         AvgHr(){
             this.DataAvg=[]
             this.DataAvg1=[]
+            this.DataAvg2=[]
 var that = this
 var i = 0
 var avg =0
+var i1 = 0
+var avg1 =0
+var i2 = 0
+var avg2 =0
 var query = firebase.database().ref("hearthrate").orderByKey();
 query.once("value")
   .then(function(snapshot) {
@@ -225,36 +278,96 @@ query.once("value")
   });
   console.log(avg/i)
   firebase.database().ref('/status').set(2);
+
 that.DataAvg.push(avg/i)
 console.log("data--")
 console.log(that.DataAvg)
   
   
 });
+var query1 = firebase.database().ref("hearthrate1").orderByKey();
+query1.once("value")
+  .then(function(snapshot1) {
+    snapshot1.forEach(function(childSnapshot1) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData1 = childSnapshot1.val();
+      console.log(childData1)
+      
+      console.log(i1)
+      
+      i1++
+      avg1 = (avg1+parseFloat(childData1))
+      console.log(avg1)
+      
+     
+  });
+    firebase.database().ref('/status1').set(2);
+    that.DataAvg1.push(avg1/i1)
+console.log("data--")
+console.log(that.DataAvg1)
+  });
+  var query2 = firebase.database().ref("hearthrate2").orderByKey();
+query2.once("value")
+  .then(function(snapshot2) {
+    snapshot2.forEach(function(childSnapshot2) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData2 = childSnapshot2.val();
+      console.log(childData2)
+      
+      console.log(i2)
+      
+      i2++
+      avg2 = (avg2+parseFloat(childData2))
+      console.log(avg2)
+      
+     
+  });
+firebase.database().ref('/status2').set(2);
+that.DataAvg2.push(avg2/i2)
+console.log("data--")
+console.log(that.DataAvg2)
+  });
 
         },
         fillData () {
         
         
       },
-      updateChart(data,data1) {
+      updateChart(data,data1,data2) {
         console.log("Update data : ")
         console.log(data)
-        const colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0']
-
+        console.log("Update data1 : ")
+        console.log(data1)
+        console.log("Update data2 : ")
+        console.log(data2)
+        
         // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
         this.chartOptions = {
-          colors: [colors[Math.floor(Math.random()*colors.length)]]
+         
         };
         // In the same way, update the series option
         this.series = [{
           name:"data",
-          data: data
+          data: data,
+          colors:"#88AEDA"
         },
         {
             name:"data1",
-            data:data1
-        }]
+            data:data1,
+            colors:"#FFA183"
+        },
+        {
+            name:"data2",
+            data:data2,
+            colors:"#ECB36C"
+        },
+        ]
       }
         
     }
