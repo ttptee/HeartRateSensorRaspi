@@ -73,7 +73,9 @@ Vue.component('apexchart', VueApexCharts)
         DataAvg1:[],
         DataHr2:[],
         DataAvg2:[],
-        
+        DataWave:[],
+        DataWave1:[],
+        DataWave2:[],
         
         
       }
@@ -100,7 +102,9 @@ var that = this
 var i = 0
 var avg =0
 var Hr=0
+var Wave=0
 var query = firebase.database().ref("hearthrate").orderByKey();
+
 query.on("value",snapshot=>{
   snapshot.forEach(function(childSnapshot) {
       // key will be "ada" the first time and "alan" the second time
@@ -125,10 +129,37 @@ that.DataHr.push(Hr);
 that.DataAvg.push(avg/i)
 console.log("--data2--")
 console.log(that.DataAvg)
-that.series.data=that.DataHr
+
+});
+
+// #####################################################
+
+var Qwave  = firebase.database().ref("wave").orderByKey();
+Qwave.on("value",snapshot=>{
+  snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+      console.log(childData)
+      
+      console.log(i)
+      
+      i++
+      Wave = (parseFloat(childData))
+      
+      
+     
+  });
+  
+that.DataWave.push(Wave); 
+
+that.series.data=that.DataWave
 console.log("series")
 console.log(that.series.data)
 that.updateChart(that.series.data,that.series.data1,that.series.data2)
+
 });
 
 // 1--------------------------------------------------------------------------
@@ -137,6 +168,7 @@ this.dataHr1=[0]
 var i1 = 0
 var avg1 =0
 var Hr1=0
+var Wave1=0
 var query1 = firebase.database().ref("hearthrate1").orderByKey();
 query1.on("value",snapshot1=>{
   snapshot1.forEach(function(childSnapshot1) {
@@ -162,8 +194,34 @@ that.DataHr1.push(Hr1);
 that.DataAvg1.push(avg1/i1)
 console.log("--data2//--")
 console.log(that.DataAvg1)
-that.series.data1=that.DataHr1
-console.log("series")
+
+});
+
+// #####################################################
+
+var Qwave1  = firebase.database().ref("wave1").orderByKey();
+Qwave1.on("value",snapshot=>{
+  snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+      console.log(childData)
+      
+      console.log(i)
+      
+      i++
+      Wave1 = (parseFloat(childData))
+      
+      
+     
+  });
+  
+that.DataWave1.push(Wave1); 
+
+that.series.data1=that.DataWave1
+console.log("series1")
 console.log(that.series.data1)
 that.updateChart(that.series.data,that.series.data1,that.series.data2)
 
@@ -175,6 +233,7 @@ this.DataAvg2=[]
 var i2 = 0
 var avg2 =0
 var Hr2=0
+var Wave2=0
 var query2 = firebase.database().ref("hearthrate2").orderByKey();
 query2.on("value",snapshot2=>{
   snapshot2.forEach(function(childSnapshot2) {
@@ -202,6 +261,35 @@ console.log("--data2##--")
 console.log(that.DataAvg2)
 that.series.data2=that.DataHr2
 console.log("series")
+console.log(that.series.data2)
+that.updateChart(that.series.data,that.series.data1,that.series.data2)
+
+});
+// #####################################################
+
+var Qwave2  = firebase.database().ref("wave2").orderByKey();
+Qwave2.on("value",snapshot=>{
+  snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+      console.log(childData)
+      
+      console.log(i)
+      
+      i++
+      Wave2 = (parseFloat(childData))
+      
+      
+     
+  });
+  
+that.DataWave2.push(Wave2); 
+
+that.series.data2=that.DataWave2
+console.log("series2")
 console.log(that.series.data2)
 that.updateChart(that.series.data,that.series.data1,that.series.data2)
 
