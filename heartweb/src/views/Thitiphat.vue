@@ -183,6 +183,7 @@ that.updateChart2(that.series2.data)
             this.DataWave=[]
         console.log('click')
         firebase.database().ref('/status').set(1);
+        firebase.database().ref('/statuswave').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         

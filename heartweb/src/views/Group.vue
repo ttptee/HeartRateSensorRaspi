@@ -1,7 +1,7 @@
 <template>
 <!-- in raspi use ttyUSB0 -->
 <div>    
-    <div class="Header">
+    <div class="HeaderG">
         <!-- Heart Rate Result -->
         <!-- {{Hr}} -->
         <div>
@@ -19,7 +19,7 @@
         <!-- <HrRateLine/> -->
     </div>
    
-    <button class="StartBtn" v-on:click="click122()">
+    <button class="StartBtnG" v-on:click="click122()">
         Start
     </button>
      <router-view/>
@@ -73,9 +73,9 @@ Vue.component('apexchart', VueApexCharts)
         DataAvg1:[],
         DataHr2:[],
         DataAvg2:[],
-        DataWave:[],
-        DataWave1:[],
-        DataWave2:[],
+        DataWave:[500],
+        DataWave1:[500],
+        DataWave2:[500],
         
         
       }
@@ -331,6 +331,9 @@ that.updateChart(that.series.data,that.series.data1,that.series.data2)
         firebase.database().ref('/status').set(1);
         firebase.database().ref('/status1').set(1);
         firebase.database().ref('/status2').set(1);
+        firebase.database().ref('/statuswave').set(1);
+        firebase.database().ref('/statuswave1').set(1);
+        firebase.database().ref('/statuswave2').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         
@@ -467,15 +470,15 @@ console.log(that.DataAvg2)
 body{
     background-color: cadetblue;
 }
-.Header{
+.HeaderG{
     text-align: center;
     font-size: 50px;
     color: aliceblue;
 }
-.StartBtn{
+.StartBtnG{
     position: absolute;
     width: 30%;
-    bottom: 10%;
+    bottom: 5%;
     height: 150px;
     font-size: 30px;
     left: 35%;
