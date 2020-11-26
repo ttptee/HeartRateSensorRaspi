@@ -26,11 +26,7 @@
       <div class="text_start">Start</div>
       <div class="text_heartrate">Start to Measure Heartrate</div>
     </button>
-    <button class="ResetBtn" v-on:click="click123()">
-       <img class="logo-start" alt="start" src="../assets/start.svg">
-      <div class="text_start">Reset Wave</div>
-      <div class="text_heartrate">Start to Measure Heartrate</div>
-    </button>
+
      <router-view/>
 </div>
 
@@ -310,23 +306,12 @@ body{
   color: aliceblue;
 }
 .StartBtn{
-  position: absolute;
-  top:670px;
+  position: static;
+  margin-top:20px;
   width:25%;
-  bottom:10%;
   height:150px;
-  left:40%;
-  background: #445D68;
-  border-radius: 10px;
-  border:none;
-}
-.ResetBtn{
-  position: absolute;
-  top:670px;
-  width:25%;
-  bottom:10%;
-  height:150px;
-  left:10%;
+  margin-left:40%;
+   margin-bottom: 20px;
   background: #445D68;
   border-radius: 10px;
   border:none;
