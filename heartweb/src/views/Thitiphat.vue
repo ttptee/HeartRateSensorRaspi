@@ -15,6 +15,9 @@
         <div class="div_graph">
           <apexchart class="graph_thitipat" type="line" height="250" ref="chart" :options="chartOptions" :series="series"></apexchart>
         </div>
+        <div class="div_graph">
+          <apexchart class="graph_thitipat" type="line" height="250" ref="chart" :options="chartOptions" :series="series2"></apexchart>
+        </div>
         <!-- <HrRateLine/> -->
    
    
@@ -58,10 +61,16 @@ Vue.component('apexchart', VueApexCharts)
           name: 'series-1',
           data: [0],
         }],
+
+        series2: [{
+          name: 'series-1',
+          data: [0],
+        }],
       
         messagesRef:'',
         DataHr:[],
         DataAvg:[],
+        DataWave:[],
         
         
         
@@ -88,6 +97,7 @@ var that = this
 var i = 0
 var avg =0
 var Hr=0
+var Wave=0
 var query = firebase.database().ref("hearthrate").orderByKey();
 query.on("value",snapshot=>{
   snapshot.forEach(function(childSnapshot) {
@@ -116,6 +126,33 @@ that.series.data=that.DataHr
 console.log("series")
 console.log(that.series.data)
 that.updateChart(that.series.data)
+
+});
+
+var query2 = firebase.database().ref("wave").orderByKey();
+query2.on("value",snapshot=>{
+  snapshot.forEach(function(childSnapshot) {
+      // key will be "ada" the first time and "alan" the second time
+    //   var key = childSnapshot.key;
+    //   console.log(key)
+      // childData will be the actual contents of the child
+      var childData = childSnapshot.val();
+      console.log(childData)
+      
+      console.log(i)
+      
+      i++
+      Wave = (parseFloat(childData))
+      
+      
+     
+  });
+  
+that.DataWave.push(Wave); 
+
+that.series2.data=that.DataWave
+
+that.updateChart2(that.series2.data)
 
 });
 
@@ -196,6 +233,20 @@ console.log(that.DataAvg)
         };
         // In the same way, update the series option
         this.series = [{
+          data: data
+        }]
+      },
+      updateChart2(data) {
+        console.log("Update data : ")
+        console.log(data)
+        const colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0']
+
+        // Make sure to update the whole options config and not just a single property to allow the Vue watch catch the change.
+        this.chartOptions = {
+          colors: [colors[Math.floor(Math.random()*colors.length)]]
+        };
+        // In the same way, update the series option
+        this.series2 = [{
           data: data
         }]
       }
