@@ -26,6 +26,11 @@
       <div class="text_start">Start</div>
       <div class="text_heartrate">Start to Measure Heartrate</div>
     </button>
+    <button class="ResetBtn" v-on:click="click123()">
+       <img class="logo-start" alt="start" src="../assets/start.svg">
+      <div class="text_start">Reset Wave</div>
+      <div class="text_heartrate">Start to Measure Heartrate</div>
+    </button>
      <router-view/>
 </div>
 
@@ -179,12 +184,14 @@ that.updateChart2(that.series2.data)
       },
         click122:function(){
             this.DataHr=[]
+            this.DataWave=[]
         console.log('click')
         firebase.database().ref('/status').set(1);
         setTimeout(this.AvgHr, 30000)
         },
         
         AvgHr(){
+            
             this.DataAvg=[]
 var that = this
 var i = 0
@@ -309,6 +316,17 @@ body{
   bottom:10%;
   height:150px;
   left:40%;
+  background: #445D68;
+  border-radius: 10px;
+  border:none;
+}
+.ResetBtn{
+  position: absolute;
+  top:670px;
+  width:25%;
+  bottom:10%;
+  height:150px;
+  left:10%;
   background: #445D68;
   border-radius: 10px;
   border:none;
