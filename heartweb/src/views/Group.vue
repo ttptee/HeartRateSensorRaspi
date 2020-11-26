@@ -259,10 +259,7 @@ that.DataHr2.push(Hr2);
 that.DataAvg2.push(avg2/i2)
 console.log("--data2##--")
 console.log(that.DataAvg2)
-that.series.data2=that.DataHr2
-console.log("series")
-console.log(that.series.data2)
-that.updateChart(that.series.data,that.series.data1,that.series.data2)
+
 
 });
 // #####################################################
