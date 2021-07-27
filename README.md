@@ -1,18 +1,22 @@
 ﻿# Welcome to HeartRateSensorRaspi
+![image](https://drive.google.com/uc?export=view&id=1MfXxKfiGVPw0m-bfWsK55HZSckpx54Jw) 
 
-อุปรกรณ์ที่ใช้ 
-1.Raspberry pi
-2.Arduino Mega
-3.Heart rate Sensor KY-039
+![image](https://drive.google.com/uc?export=view&id=1koOrhVoiz_0L4B6AM1bb78XQaXPDebFA)
+
+# อุปรกรณ์ที่ใช้ 
+1.Raspberry pi\
+2.Arduino Mega\
+3.Heart rate Sensor KY-039\
 4. Pulse Heart Rate Sensor
-ซอฟแวร์ที่ใช้
-1.python
-2.vuejs
-3.firebase real time database
-4.ardino IDE
+
+# ซอฟแวร์ที่ใช้
+1.python\
+2.vuejs\
+3.firebase real time database\
+4.ardino IDE\
 5.vs code
 
-หลักการ 
+# หลักการ 
 Heart rate Sensor (KY-039)  ทำหน้าที่ตรวจจับแสงที่เปลี่ยนไปจากการไหลเวียนของเลือดในนิ้วมือ ให้ค่าออกมาเป็น Analog Output จากเซนเซอร์
 Pulse Heart Rate Sensor วัดสัญญาคลื่นหัวใจ โดยหลักการคือการยิงลำแสงความเข้มข้นสุงที่อยู่ไว้ที่ขตำแหน่งที่มีหลอดเลือดสำคัญอยู่ มีชั้นไขมันไม่มากนัก เพื่อตรวจสอบจังหวะที่หลอดเลือดมีสีเข้ม-อ่อนเปลี่ยนไปตามแรงสูบเลือดของหัวใจ ซึ่งนำมาคำนวนเป็นจำนวนครั้งการเต้นของชีพจรในหนึ่งนาที โดยใช้ระยะห่างของแต่ครั้งที่จับได้ มาคิดเป็นครั้งต่อนาทีนั่
 โดยเราจะนำเซ็นเซอร์สองตัวมาใช้ ร่วมกันเนื่องจาก ตัว KY-039 มี Nosie ค่อนข้างมาก จึงจำเป็นตัวใช้ตัว Pulse Heart Rate Sensor มาช่วยวัดสัญญาณหัวใจ โดยจะนำทั้งสองตัวมาต่อรวมกันใน Arduino MEGA  โดยให้ตัวเอ้าท์พุต ของ sensor อยู่ใน ช่อง analog คนละช่อง จากนั้นเขียน โค้ดให้ ส่งค่าออกมาผ่าน serial ในรูปแปป value1,value2
